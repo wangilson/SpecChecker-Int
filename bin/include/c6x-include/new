@@ -1,0 +1,42 @@
+/*****************************************************************************/
+/* new   v4.32                                                              */
+/* Copyright (c) 1996-2002 Texas Instruments Incorporated                    */
+/*****************************************************************************/
+
+#ifndef _NEW
+#define _NEW
+
+#include <cstdlib>      // for size_t
+#include <exception>    // for exception
+
+namespace std
+{
+   class bad_alloc {};
+   struct nothrow_t {};
+   extern const nothrow_t nothrow;
+   typedef void (*new_handler)();
+   new_handler set_new_handler(new_handler new_p); // throw();
+}	
+
+void *operator new(std::size_t size); // throw(std::bad_alloc)
+void *operator new(std::size_t size, const std::nothrow_t&); // throw()
+void  operator delete(void *ptr); // throw()
+void  operator delete(void *ptr, const std::nothrow_t&); // throw()
+void *operator new[](std::size_t size); // throw(std::bad_alloc)
+void *operator new[](std::size_t size, const std::nothrow_t& nt_arg); //throw()
+void  operator delete[](void *ptr); // throw()
+void  operator delete[](void *ptr, const std::nothrow_t& nt_arg); // throw()
+void *operator new  (std::size_t, void *ptr); // throw()
+void *operator new[](std::size_t, void *ptr); // throw()
+void  operator delete  (void *ptr, void*); // throw()
+void  operator delete[](void *ptr, void*); // throw()
+
+#ifdef __embedded_cplusplus
+//----------------------------------------------------------------------------
+// We cannot expect the embedded C++ user to use std namespace. So we include
+// the using directive when compiled under embedded C++.
+//----------------------------------------------------------------------------
+using namespace std;
+#endif /* __embedded_cplusplus */
+
+#endif

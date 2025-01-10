@@ -1,0 +1,57 @@
+/*****************************************************************************/
+/* typeinfo  v4.32                                                          */
+/* Copyright (c) 1996-2002 Texas Instruments Incorporated                    */
+/*****************************************************************************/
+
+#ifndef _TYPEINFO
+#define _TYPEINFO
+
+#ifndef __embedded_cplusplus
+
+#include <stdexcept>
+
+namespace std 
+{
+   class bad_cast   {};
+   class bad_typeid {};
+
+#pragma define_type_info
+   class type_info 
+   {
+      public:
+	 virtual ~type_info();
+	 bool operator==(const type_info& rhs) const;
+	 bool operator!=(const type_info& rhs) const;
+	 bool before(const type_info& rhs) const;
+	 const char* name() const;
+      protected:
+	 type_info(const type_info& rhs);
+      private:
+	 type_info& operator=(const type_info& rhs);
+   };
+
+//   class bad_cast : public exception 
+//   {
+//      public:
+//	 bad_cast() throw();
+//	 bad_cast(const bad_cast&) throw();
+//	 bad_cast& operator=(const bad_cast&) throw();
+//	 virtual ~bad_cast() throw();
+//	 virtual const char* what() const throw();
+//   };
+//
+//   class bad_typeid : public exception 
+//   {
+//      public:
+//	 bad_typeid() throw();
+//	 bad_typeid(const bad_typeid&) throw();
+//	 bad_typeid& operator=(const bad_typeid&) throw();
+//	 virtual ~bad_typeid() throw();
+//	 virtual const char* what() const throw();
+//   };
+
+   void dump_type_info(const type_info& info); // Debug func, should be removed
+}
+
+#endif /* __embedded_cplusplus */
+#endif /*_TYPEINFO */
