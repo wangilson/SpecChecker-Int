@@ -12,8 +12,6 @@ Contributions to this tool are most welcome!
 
 ## Requirments
 * Runs on Windows  
-* Install python3
-    * https://docs.python.org/3/using/windows.html  
 * Clone the bugs dectection tool:  
 ```
 git clone https://github.com/wangilson/SpecChecker-Int
