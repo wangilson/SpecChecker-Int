@@ -2,7 +2,8 @@
 This repository hosts SpecChecker-Int, a tool that provides extensible, precise and efficient concurrent bugs detection for interrupt-driven embedded software.
 SpecChecker-Int offers embedded software testers a bug warning report to enhance the efficiency of manual code inspection. 
 Contributions to this tool are most welcome!
-**Also, our video demonstration is presented at [https://youtu.be/NHQrNDjI_7o](https://youtu.be/OPnGWo4LTEc).**
+
+**Also, our video demonstration is presented at https://youtu.be/KW88ZS7LD3s.**
 ## Table of Contents
 1. [Requirments](#requirments)  
 2. [Using the Tool](#using-the-tool)  
@@ -22,32 +23,23 @@ git clone https://github.com/wangilson/SpecChecker-Int
 ***
 
 ## Using the Tool
-SpecChecker-Int accepts two input formats: `xxx.bc` | `file path`.  
-  
-You can use `xxx.bc` as input to the tool, but you need to have Clang on your device.  
-* Install clang
-    * https://releases.llvm.org/download.html#7.0.0  
-  
 Display the command line parameters using: 
   
-```
-cd SpecCheckerInt/bin  
-SpecChecker-Int.exe ../example/test.bc -tasks=main,isr -priority=0,1 -reportFile=../SpecCheckerInt/example/result.json
-```
 If your subject is an entire project, then you can just use the folder as input to the tool.  
 ```
-cd SpecCheckerISA/bin
-SpecChecker-Int.exe ../example -tasks=main,isr -priority=0,1 -reportFile=../SpecCheckerInt/example/result.json
+cd SpecCheckerInt/bin
+SpecChecker-Int.exe ../example -int-bof=true -tasks=main,Int0ISR -priority=0,1 -reportFile=../result/result.json
 ```
 ***
 
-### SpecChecker-ISA Optional Command Line Parameters:
+### SpecChecker-Int Optional Command Line Parameters:
 
 Parameter | Description
 ---- | ----
 -tasks | List of program entry points (task or isr)
 -priority | List of program priority
 -reportFile | Output floder
+-int-dac | Toggle to activate the atomicity violations checker
 -int-bof | Toggle to activate the out-of-bounds array access checker
 -int-dbz | Toggle to activate the divided-by-zero checker
 Additional checker options are available and can be viewed using the `--help` command.
@@ -57,7 +49,20 @@ Additional checker options are available and can be viewed using the `--help` co
 
 ## Inspecting the Output
 You can view the output of SpecChecker-Int in a `json` file.  
-Let's see the output of analyzing the `test.c` program (found under `example/test.c`)  
+Let's see the output of analyzing the `example` program
+### Bug Report Details
+
+| Key               | Value |
+| ----------------- | ----- |
+| **BugType**       | `int-bof` |
+| **Confidence**    | `1` |
+| **ConfidenceMessage** | `` |
+| **Line**          | `28` |
+| **Column**        | `5` |
+| **File**          | `D:\SpecChecker-Int\bin\..\example\simple_001.c` |
+| **VarName**       | `receive_buffer_B` |
+| **Message**       | `Buffer Over Flow` |
+| **interruptPoint**        | `23` |
 
 ***
 ***
