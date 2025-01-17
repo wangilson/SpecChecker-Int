@@ -1,7 +1,7 @@
-# SpecChecker-Int
+# ![Logo](image/logo.png) SpecChecker-Int                                         
 This repository hosts SpecChecker-Int, a tool that provides extensible, precise and efficient concurrent bugs detection for interrupt-driven embedded software.
 SpecChecker-Int offers embedded software testers a bug warning report to enhance the efficiency of manual code inspection. 
-Contributions to this tool are most welcome!
+Contributions to this tool are most welcome!                                    
 
 **Also, our video demonstration is presented at https://youtu.be/KW88ZS7LD3s.**
 ## Table of Contents
